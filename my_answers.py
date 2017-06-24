@@ -78,18 +78,8 @@ def window_transform_text(text,window_size,step_size):
     inputs = []
     outputs = []
 
-    # Loop from 0th char to (len(text) - window_size - 1)th char
-    for i in range(0, len(text) - window_size - 1):
-        # Declare a temp variable
-        temp = []
-        # Put window_size number of elements following the i-th element
-        # into the temp variable
-        for p in range(0, window_size):
-            temp.append(text[i + p])
-        # Convert the temp variable to a string and put it to inputs
-        inputs.append(''.join(temp))
-        # Add corresponding output string
-        outputs.append(text[window_size + i])
+    inputs= [text[i:i+window_size] for i in range(0,len(text)-window_size, step_size)]
+    outputs= [text[i+window_size] for i in range(0,len(text)-window_size, step_size)]
 
     # reshape each
     inputs = np.asarray(inputs)
